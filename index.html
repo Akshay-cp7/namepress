@@ -41,7 +41,7 @@
       text-align: center;
       padding: 3rem 1.5rem 3.5rem;
       position: relative;
-      background: linear-gradient(160deg, var(--blue-deep) 0%, var(--blue-dark) 50%, #1560BB 100%);
+      background: var(--white);
       overflow: hidden;
     }
 
@@ -50,8 +50,8 @@
       content: '';
       position: absolute; inset: 0;
       background-image:
-        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+        linear-gradient(rgba(26,107,204,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26,107,204,0.03) 1px, transparent 1px);
       background-size: 40px 40px;
       pointer-events: none;
     }
@@ -60,7 +60,7 @@
     .hero-glow {
       position: absolute;
       width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(59,158,255,0.25) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(59,158,255,0.08) 0%, transparent 70%);
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       pointer-events: none;
@@ -88,9 +88,9 @@
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.18);
-      color: rgba(255,255,255,0.85);
+      background: var(--blue-light);
+      border: 1px solid var(--blue-mid);
+      color: var(--blue-dark);
       font-size: 0.68rem;
       letter-spacing: 0.15em;
       font-weight: 600;
@@ -104,14 +104,14 @@
     .badge-dot {
       width: 6px; height: 6px;
       border-radius: 50%;
-      background: #4DFFB0;
+      background: var(--blue);
     }
 
     h1 {
       font-weight: 800;
       font-size: clamp(2.6rem, 10vw, 5rem);
       line-height: 1.0;
-      color: var(--white);
+      color: var(--text);
       letter-spacing: -0.02em;
       animation: fadeUp 0.5s 0.1s ease both;
     }
@@ -122,7 +122,7 @@
 
     .tagline {
       font-size: clamp(0.95rem, 3.5vw, 1.15rem);
-      color: rgba(255,255,255,0.6);
+      color: var(--muted);
       font-weight: 400;
       max-width: 360px;
       line-height: 1.65;
@@ -142,8 +142,8 @@
       display: inline-flex;
       align-items: center;
       gap: 0.65rem;
-      background: var(--white);
-      color: var(--blue-dark);
+      background: var(--blue);
+      color: var(--white);
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 700;
       font-size: 1rem;
@@ -152,7 +152,7 @@
       text-decoration: none;
       letter-spacing: 0.01em;
       transition: transform 0.15s, box-shadow 0.15s;
-      box-shadow: 0 6px 28px rgba(0,0,0,0.25);
+      box-shadow: 0 6px 28px rgba(26,107,204,0.2);
     }
 
     .btn-dl:active { transform: scale(0.97); }
@@ -160,13 +160,13 @@
     @media (hover: hover) {
       .btn-dl:hover {
         transform: translateY(-2px);
-        box-shadow: 0 10px 36px rgba(0,0,0,0.3);
+        box-shadow: 0 10px 36px rgba(26,107,204,0.3);
       }
     }
 
     .free-note {
       font-size: 0.73rem;
-      color: rgba(255,255,255,0.35);
+      color: var(--muted);
     }
 
     /* screenshot preview strip */
@@ -181,10 +181,11 @@
     }
 
     .preview-phone {
-      width: 180px;
+      width: 100%;
+      max-width: 640px;
       border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 2px rgba(255,255,255,0.12);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 0 0 2px rgba(26,107,204,0.08);
       transform: perspective(600px) rotateX(4deg);
     }
 
@@ -203,7 +204,7 @@
     .screenshot-wrap {
       border-radius: 16px;
       overflow: hidden;
-      max-width: 520px;
+      max-width: 320px;
       margin: 2rem auto 0;
       box-shadow: 0 4px 32px rgba(26,107,204,0.12), 0 0 0 1px var(--blue-mid);
     }
@@ -476,7 +477,8 @@
       }
 
       .preview-phone {
-        width: 120px;
+        width: 100%;
+        max-width: 280px;
       }
     }
 
@@ -589,7 +591,8 @@
       }
 
       .preview-phone {
-        width: 240px;
+        width: 100%;
+        max-width: 420px;
       }
 
       h1 {
@@ -610,7 +613,7 @@
       }
 
       .screenshot-wrap {
-        max-width: 600px;
+        max-width: 380px;
       }
 
       .features {
@@ -652,11 +655,12 @@
       }
 
       .preview-phone {
-        width: 280px;
+        width: 100%;
+        max-width: 550px;
       }
 
       .screenshot-wrap {
-        max-width: 700px;
+        max-width: 420px;
       }
 
       .feature-grid {
@@ -702,7 +706,7 @@
     <!-- phone screenshot preview -->
     <div class="hero-preview">
       <div class="preview-phone">
-        <img src="https://akshaycp.com/namepress/vertical.webp" alt="NamePress app screenshot">
+        <img src="https://akshaycp.com/namepress/horizontal.webp" alt="NamePress app screenshot">
       </div>
     </div>
   </section>
@@ -712,7 +716,7 @@
     <p class="sec-label">See it in action</p>
     <h2 class="sec-title">Your template.<br>Your names. Done.</h2>
     <div class="screenshot-wrap">
-      <img src="https://akshaycp.com/namepress/horizontal.webp" alt="NamePress bulk certificate generation">
+      <img src="https://akshaycp.com/namepress/vertical.webp" alt="NamePress bulk certificate generation">
     </div>
   </section>
 
