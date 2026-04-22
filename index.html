@@ -20,6 +20,23 @@
       --off-white: #F6F9FF;
       --text: #0D1B33;
       --muted: #5A7399;
+      color-scheme: light;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --blue: #4A9FFF;
+        --blue-dark: #8FC3FF;
+        --blue-deep: #071A34;
+        --blue-light: #10233F;
+        --blue-mid: #2A4E7E;
+        --accent: #6DB6FF;
+        --white: #0B1220;
+        --off-white: #111A2C;
+        --text: #E6EDF7;
+        --muted: #A7B8D4;
+        color-scheme: dark;
+      }
     }
 
     html { scroll-behavior: smooth; }
