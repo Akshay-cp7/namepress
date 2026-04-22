@@ -2,16 +2,571 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=https://play.google.com/store/apps/details?id=com.arzdrz.namepress">
-  <link rel="canonical" href="https://play.google.com/store/apps/details?id=com.arzdrz.namepress" />
-  <title>Redirecting...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NamePress – Bulk Certificate Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  <script>
-    window.location.href = "https://play.google.com/store/apps/details?id=com.arzdrz.namepress";
-  </script>
+    :root {
+      --blue: #1A6BCC;
+      --blue-dark: #0F4A96;
+      --blue-deep: #0A2E5C;
+      --blue-light: #EBF3FF;
+      --blue-mid: #C5DCFA;
+      --accent: #3B9EFF;
+      --white: #FFFFFF;
+      --off-white: #F6F9FF;
+      --text: #0D1B33;
+      --muted: #5A7399;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem 1.5rem 3.5rem;
+      position: relative;
+      background: linear-gradient(160deg, var(--blue-deep) 0%, var(--blue-dark) 50%, #1560BB 100%);
+      overflow: hidden;
+    }
+
+    /* subtle grid overlay */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    /* glow blob */
+    .hero-glow {
+      position: absolute;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(59,158,255,0.25) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .app-icon {
+      width: 88px; height: 88px;
+      border-radius: 22px;
+      overflow: hidden;
+      margin: 0 auto 1.5rem;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 3px rgba(255,255,255,0.1);
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .app-icon img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.85);
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 0.3rem 0.9rem;
+      border-radius: 100px;
+      margin-bottom: 1.2rem;
+      animation: fadeUp 0.5s 0.05s ease both;
+    }
+
+    .badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #4DFFB0;
+    }
+
+    h1 {
+      font-weight: 800;
+      font-size: clamp(2.6rem, 10vw, 5rem);
+      line-height: 1.0;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      animation: fadeUp 0.5s 0.1s ease both;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .tagline {
+      font-size: clamp(0.95rem, 3.5vw, 1.15rem);
+      color: rgba(255,255,255,0.6);
+      font-weight: 400;
+      max-width: 360px;
+      line-height: 1.65;
+      margin: 1rem auto 2.5rem;
+      animation: fadeUp 0.5s 0.18s ease both;
+    }
+
+    .cta-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.7rem;
+      animation: fadeUp 0.5s 0.25s ease both;
+    }
+
+    .btn-dl {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      background: var(--white);
+      color: var(--blue-dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 1rem 2rem;
+      border-radius: 14px;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 6px 28px rgba(0,0,0,0.25);
+    }
+
+    .btn-dl:active { transform: scale(0.97); }
+
+    @media (hover: hover) {
+      .btn-dl:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 36px rgba(0,0,0,0.3);
+      }
+    }
+
+    .free-note {
+      font-size: 0.73rem;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* screenshot preview strip */
+    .hero-preview {
+      position: relative;
+      z-index: 1;
+      margin-top: 3rem;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      animation: fadeUp 0.6s 0.35s ease both;
+    }
+
+    .preview-phone {
+      width: 180px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 2px rgba(255,255,255,0.12);
+      transform: perspective(600px) rotateX(4deg);
+    }
+
+    .preview-phone img {
+      width: 100%;
+      display: block;
+    }
+
+    /* ── SCREENSHOT SECTION ── */
+    .screenshot-section {
+      background: var(--off-white);
+      padding: 4rem 1.5rem;
+      text-align: center;
+    }
+
+    .screenshot-wrap {
+      border-radius: 16px;
+      overflow: hidden;
+      max-width: 520px;
+      margin: 2rem auto 0;
+      box-shadow: 0 4px 32px rgba(26,107,204,0.12), 0 0 0 1px var(--blue-mid);
+    }
+
+    .screenshot-wrap img {
+      width: 100%;
+      display: block;
+    }
+
+    /* ── FEATURES ── */
+    .features {
+      background: var(--white);
+      padding: 4rem 1.5rem;
+    }
+
+    .sec-label {
+      text-align: center;
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--blue);
+      font-weight: 700;
+      margin-bottom: 0.55rem;
+    }
+
+    .sec-title {
+      font-weight: 800;
+      font-size: clamp(1.5rem, 6vw, 2.1rem);
+      text-align: center;
+      color: var(--text);
+      margin-bottom: 2.5rem;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .f-card {
+      background: var(--off-white);
+      border: 1px solid var(--blue-mid);
+      border-radius: 14px;
+      padding: 1.2rem 1rem;
+      transition: box-shadow 0.15s, border-color 0.15s;
+    }
+
+    @media (hover: hover) {
+      .f-card:hover {
+        border-color: var(--accent);
+        box-shadow: 0 4px 20px rgba(26,107,204,0.1);
+      }
+    }
+
+    .f-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: var(--blue-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .f-title { font-weight: 700; font-size: 0.88rem; color: var(--text); margin-bottom: 0.2rem; line-height: 1.3; }
+    .f-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.55; font-weight: 400; }
+
+    /* ── HOW IT WORKS ── */
+    .how {
+      background: linear-gradient(160deg, var(--blue-deep) 0%, var(--blue-dark) 100%);
+      padding: 4rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .how::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    .how .sec-label { color: var(--accent); position: relative; }
+    .how .sec-title { color: var(--white); position: relative; }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      max-width: 360px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .step {
+      display: flex;
+      gap: 1.2rem;
+      position: relative;
+    }
+
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 18px; top: 40px; bottom: -2px;
+      width: 1px;
+      background: rgba(59,158,255,0.2);
+    }
+
+    .step-num {
+      width: 36px; height: 36px;
+      min-width: 36px;
+      border-radius: 50%;
+      background: rgba(59,158,255,0.15);
+      border: 1.5px solid rgba(59,158,255,0.4);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .step-body { padding-bottom: 1.8rem; }
+    .step-body h3 { font-weight: 600; font-size: 0.92rem; color: var(--white); margin-bottom: 0.2rem; }
+    .step-body p { font-size: 0.78rem; color: rgba(255,255,255,0.45); line-height: 1.6; }
+
+    /* ── PERFECT FOR ── */
+    .perfect { background: var(--off-white); padding: 4rem 1.5rem; }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      justify-content: center;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .tag {
+      background: var(--white);
+      border: 1px solid var(--blue-mid);
+      color: var(--blue-dark);
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.4rem 0.9rem;
+      border-radius: 100px;
+    }
+
+    /* ── FOOTER CTA ── */
+    .footer-cta {
+      background: var(--blue);
+      padding: 4.5rem 1.5rem 3.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer-cta::before {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .footer-cta h2 {
+      font-weight: 800;
+      font-size: clamp(1.7rem, 6vw, 2.4rem);
+      color: var(--white);
+      margin-bottom: 0.6rem;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      position: relative;
+    }
+
+    .footer-cta > p {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .btn-dl-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      background: var(--white);
+      color: var(--blue-dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 1rem 2rem;
+      border-radius: 14px;
+      text-decoration: none;
+      box-shadow: 0 6px 28px rgba(0,0,0,0.2);
+      transition: transform 0.15s, box-shadow 0.15s;
+      position: relative;
+    }
+
+    .btn-dl-white:active { transform: scale(0.97); }
+
+    @media (hover: hover) {
+      .btn-dl-white:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(0,0,0,0.25); }
+    }
+
+    .footer-note {
+      margin-top: 2rem;
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.25);
+      position: relative;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
-<body style="font-family: sans-serif; text-align: center; margin-top: 20%;">
-  <p>Redirecting to Playstore...</p>
-  <p>If not, <a href="https://play.google.com/store/apps/details?id=com.arzdrz.namepress">click here</a>.</p>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <div class="app-icon">
+        <img src="https://akshaycp.com/namepress/icon.webp" alt="NamePress icon">
+      </div>
+      <div class="badge"><span class="badge-dot"></span>Free on Google Play</div>
+      <h1>Name<span>Press</span></h1>
+      <p class="tagline">Generate hundreds of personalised certificates in seconds — no design skills needed.</p>
+      <div class="cta-group">
+        <a class="btn-dl" href="https://play.google.com/store/apps/details?id=com.arzdrz.namepress" target="_blank" rel="noopener">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M3.18 23.76c.33.18.7.22 1.06.12l12.64-7.3-2.9-2.9-10.8 10.08zM.5 1.26C.19 1.6 0 2.12 0 2.8v18.4c0 .68.19 1.2.5 1.54l.08.08 10.3-10.3v-.24L.58 1.18.5 1.26zM20.9 10.37l-2.93-1.7-3.23 3.23 3.23 3.23 2.94-1.7c.84-.49.84-1.06-.01-1.06zM4.24.36L16.88 7.66l-2.9 2.9L4.16.48a.9.9 0 0 1 .08-.12z"/>
+          </svg>
+          Download for Android
+        </a>
+        <span class="free-note">Free · No login required</span>
+      </div>
+    </div>
+
+    <!-- phone screenshot preview -->
+    <div class="hero-preview">
+      <div class="preview-phone">
+        <img src="https://akshaycp.com/namepress/vertical.webp" alt="NamePress app screenshot">
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREENSHOT / HOW IT LOOKS -->
+  <section class="screenshot-section">
+    <p class="sec-label">See it in action</p>
+    <h2 class="sec-title">Your template.<br>Your names. Done.</h2>
+    <div class="screenshot-wrap">
+      <img src="https://akshaycp.com/namepress/horizontal.webp" alt="NamePress bulk certificate generation">
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <p class="sec-label">What you get</p>
+    <h2 class="sec-title">Everything you need,<br>nothing you don't</h2>
+    <div class="feature-grid">
+      <div class="f-card">
+        <div class="f-icon">🚀</div>
+        <div class="f-title">Bulk Generation</div>
+        <div class="f-desc">Hundreds of certificates in seconds, not hours.</div>
+      </div>
+      <div class="f-card">
+        <div class="f-icon">📄</div>
+        <div class="f-title">CSV Import</div>
+        <div class="f-desc">Upload a CSV or paste names directly.</div>
+      </div>
+      <div class="f-card">
+        <div class="f-icon">🎨</div>
+        <div class="f-title">Your Template</div>
+        <div class="f-desc">Use your own design with full placement control.</div>
+      </div>
+      <div class="f-card">
+        <div class="f-icon">📑</div>
+        <div class="f-title">PDF Export</div>
+        <div class="f-desc">All certs in one print-ready PDF file.</div>
+      </div>
+      <div class="f-card">
+        <div class="f-icon">📍</div>
+        <div class="f-title">Precise Placement</div>
+        <div class="f-desc">Adjust font, size &amp; alignment to the pixel.</div>
+      </div>
+      <div class="f-card">
+        <div class="f-icon">⚡</div>
+        <div class="f-title">Simple Workflow</div>
+        <div class="f-desc">Four steps, no complicated setup.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how">
+    <p class="sec-label">How it works</p>
+    <h2 class="sec-title">Four steps to done</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Upload your certificate template</h3>
+          <p>Use any image or design you already have.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Import your list of names</h3>
+          <p>CSV file or paste them in manually — your choice.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Adjust the name position</h3>
+          <p>Pick font, size and exact placement on the template.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Generate &amp; export</h3>
+          <p>All certificates saved as a single PDF, instantly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERFECT FOR -->
+  <section class="perfect">
+    <p class="sec-label">Perfect for</p>
+    <h2 class="sec-title">Built for every occasion</h2>
+    <div class="tags">
+      <span class="tag">🏫 Schools &amp; Colleges</span>
+      <span class="tag">🎓 Online Courses</span>
+      <span class="tag">🏆 Competitions</span>
+      <span class="tag">🧑‍💼 Workshops &amp; Seminars</span>
+      <span class="tag">⚽ Sports Events</span>
+      <span class="tag">📋 Training Programs</span>
+    </div>
+  </section>
+
+  <!-- FOOTER CTA -->
+  <section class="footer-cta">
+    <h2>Start generating<br>certificates today</h2>
+    <p>Save hours of manual work with NamePress.</p>
+    <a class="btn-dl-white" href="https://play.google.com/store/apps/details?id=com.arzdrz.namepress" target="_blank" rel="noopener">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M3.18 23.76c.33.18.7.22 1.06.12l12.64-7.3-2.9-2.9-10.8 10.08zM.5 1.26C.19 1.6 0 2.12 0 2.8v18.4c0 .68.19 1.2.5 1.54l.08.08 10.3-10.3v-.24L.58 1.18.5 1.26zM20.9 10.37l-2.93-1.7-3.23 3.23 3.23 3.23 2.94-1.7c.84-.49.84-1.06-.01-1.06zM4.24.36L16.88 7.66l-2.9 2.9L4.16.48a.9.9 0 0 1 .08-.12z"/>
+      </svg>
+      Download for Android
+    </a>
+    <p class="footer-note">© 2026 Akshay C P · NamePress</p>
+  </section>
+
 </body>
 </html>
