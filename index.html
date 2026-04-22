@@ -68,6 +68,7 @@
     .hero-content { position: relative; z-index: 1; }
 
     .app-icon {
+      display: none;
       width: 88px; height: 88px;
       border-radius: 22px;
       overflow: hidden;
@@ -424,6 +425,253 @@
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
       to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── LANDSCAPE ORIENTATION ── */
+    @media (orientation: landscape) and (max-height: 600px) {
+      .hero {
+        min-height: auto;
+        padding: 1.5rem 1.5rem 2rem;
+      }
+
+      .hero-glow {
+        width: 300px;
+        height: 300px;
+      }
+
+      .app-icon {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 0.8rem;
+      }
+
+      .badge {
+        margin-bottom: 0.8rem;
+        font-size: 0.6rem;
+      }
+
+      h1 {
+        font-size: clamp(1.8rem, 8vw, 2.8rem);
+        margin-bottom: 0.3rem;
+      }
+
+      .tagline {
+        font-size: 0.85rem;
+        max-width: 500px;
+        margin: 0.5rem auto 1.5rem;
+      }
+
+      .cta-group {
+        gap: 0.5rem;
+      }
+
+      .btn-dl {
+        font-size: 0.9rem;
+        padding: 0.8rem 1.5rem;
+      }
+
+      .hero-preview {
+        margin-top: 1rem;
+      }
+
+      .preview-phone {
+        width: 120px;
+      }
+    }
+
+    @media (orientation: landscape) and (max-height: 800px) {
+      .screenshot-section {
+        padding: 2.5rem 1.5rem;
+      }
+
+      .screenshot-wrap {
+        margin-top: 1rem;
+      }
+
+      .features {
+        padding: 2.5rem 1.5rem;
+      }
+
+      .feature-grid {
+        gap: 0.6rem;
+      }
+
+      .f-card {
+        padding: 0.9rem 0.8rem;
+      }
+
+      .f-title {
+        font-size: 0.8rem;
+      }
+
+      .f-desc {
+        font-size: 0.7rem;
+      }
+
+      .how {
+        padding: 2.5rem 1.5rem;
+      }
+
+      .steps {
+        max-width: 500px;
+      }
+
+      .step {
+        gap: 1rem;
+      }
+
+      .step-body {
+        padding-bottom: 1.2rem;
+      }
+
+      .step-body h3 {
+        font-size: 0.85rem;
+      }
+
+      .step-body p {
+        font-size: 0.73rem;
+      }
+
+      .perfect {
+        padding: 2.5rem 1.5rem;
+      }
+
+      .footer-cta {
+        padding: 2.5rem 1.5rem 2rem;
+      }
+
+      .footer-cta h2 {
+        font-size: clamp(1.3rem, 5vw, 1.8rem);
+        margin-bottom: 0.4rem;
+      }
+
+      .footer-cta > p {
+        font-size: 0.8rem;
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    /* ── TABLET & DESKTOP PORTRAIT ── */
+    @media (min-width: 481px) {
+      .feature-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        max-width: 720px;
+        gap: 1rem;
+      }
+
+      .steps {
+        max-width: 520px;
+      }
+
+      .tags {
+        max-width: 100%;
+      }
+    }
+
+    /* ── TABLET LANDSCAPE ── */
+    @media (min-width: 768px) {
+      .hero {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        text-align: left;
+        align-items: center;
+        padding: 4rem 3rem;
+        gap: 2rem;
+      }
+
+      .hero-content {
+        max-width: 500px;
+      }
+
+      .hero-preview {
+        margin-top: 0;
+      }
+
+      .preview-phone {
+        width: 240px;
+      }
+
+      h1 {
+        font-size: clamp(2.8rem, 5vw, 3.5rem);
+      }
+
+      .tagline {
+        max-width: 100%;
+        text-align: left;
+      }
+
+      .cta-group {
+        align-items: flex-start;
+      }
+
+      .screenshot-section {
+        padding: 5rem 3rem;
+      }
+
+      .screenshot-wrap {
+        max-width: 600px;
+      }
+
+      .features {
+        padding: 5rem 3rem;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        max-width: 900px;
+        gap: 1.5rem;
+      }
+
+      .how {
+        padding: 5rem 3rem;
+      }
+
+      .steps {
+        max-width: 600px;
+      }
+
+      .perfect {
+        padding: 5rem 3rem;
+      }
+
+      .tags {
+        max-width: 800px;
+      }
+
+      .footer-cta {
+        padding: 5rem 3rem;
+      }
+    }
+
+    /* ── LARGE DESKTOP ── */
+    @media (min-width: 1024px) {
+      .hero {
+        padding: 5rem 4rem;
+        gap: 3rem;
+      }
+
+      .preview-phone {
+        width: 280px;
+      }
+
+      .screenshot-wrap {
+        max-width: 700px;
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 1000px;
+        gap: 2rem;
+      }
+
+      .steps {
+        max-width: 700px;
+      }
+
+      .tags {
+        max-width: 900px;
+        gap: 0.7rem;
+      }
     }
   </style>
 </head>
